@@ -63,6 +63,14 @@ var requestHandler = function(request, response) {
     headers['Content-Type'] = 'application/json';
     response.writeHead(statusCode, headers);
     response.end(JSON.stringify(_data));
+  } else if (request.method === 'OPTIONS') {
+    var statusCode = 200;
+    var options = '200 OK\nAllow: HEAD,GET,PUT,DELETE,OPTIONS';
+
+    var headers = defaultCorsHeaders;
+    headers['Content-Type'] = 'text/plain';
+    response.writeHead(statusCode, headers);
+    response.end(options);
   } else {
     var statusCode = 405;
     var headers = defaultCorsHeaders;

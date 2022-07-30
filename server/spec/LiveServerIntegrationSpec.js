@@ -65,5 +65,29 @@ describe('server', function() {
     });
   });
 
+  it('should 405 on DELETE requests to /classes/messages', function(done) {
+    var requestParams = {method: 'DELETE',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Jono',
+        text: 'Do my bidding!'}
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(405);
+      done();
+    });
+  });
+
+  it('should 405 on HEAD requests to /classes/messages', function(done) {
+    var requestParams = {method: 'HEAD',
+      uri: 'http://127.0.0.1:3000/classes/messages'
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(405);
+      done();
+    });
+  });
 
 });
