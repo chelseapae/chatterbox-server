@@ -48,21 +48,27 @@ var requestHandler = function(request, response) {
   } else if (request.method === 'POST') {
     //request.on --accepts string&cb
     //chunks --in node
-    var statusCode = 201;
     var headers = defaultCorsHeaders;
     headers['Content-Type'] = 'application/json';
-
+    var statusCode = 201;
     request.on('data', (chunk) => {
-      _data.push(JSON.parse(chunk));
+      var message = JSON.parse(chunk);
+      _data.push(message);
     });
     response.writeHead(statusCode, headers);
     response.end(JSON.stringify(_data));
-  } else {
+  } else if (request.method === 'GET') {
     var statusCode = 200;
     var headers = defaultCorsHeaders;
     headers['Content-Type'] = 'application/json';
     response.writeHead(statusCode, headers);
     response.end(JSON.stringify(_data));
+  } else {
+    var statusCode = 405;
+    var headers = defaultCorsHeaders;
+    headers['Content-Type'] = 'application/json';
+    response.writeHead(statusCode, headers);
+    response.end(JSON.stringify([]));
   }
 
   // See the note below about CORS headers.
