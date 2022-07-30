@@ -97,7 +97,6 @@ var requestHandler = function(request, response) {
   // console.log('-------------------------------------> RESPONSE', response);
   // console.log('REQUEST------------------------------------->------------------------------------->', request);
   // response.end(JSON.stringify([]));
-  //JSON.stringify(message)
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
